@@ -1,0 +1,199 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+html {
+    // Custom scroll bar
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #e1c83f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #fff;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a00;
+  }
+}
+
+html,
+body {
+  height: 500vh;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.2s linear;
+  .hero-section,
+  .section {
+    position: relative;
+    height: 100%;
+    width: 60vw;
+    margin-left: -20vw;
+    flex-shrink: 1;
+    transition: width 0.5s;
+    transform: skewX(-15deg);
+    overflow: hidden;
+    &:nth-child(1) {
+      display: flex;
+      background: #e1c83f; // #0ff;
+    }
+    &.active {
+      width: 80vw;
+    }
+    & .hero {
+      width: 100%;
+      max-width: 18vw;
+      height: auto;
+      transform: skewX(15deg);
+      margin: auto;
+    }
+    & .image {
+      height: 110%;
+      width: 130%;
+      transform: skewX(15deg);
+      object-fit: cover;
+      margin-left: -30%;
+    }
+  }
+  .section {
+    &.active {
+      & .content {
+        transform: skewX(15deg) translateY(0%);
+      }
+      &:hover {
+        .hover {
+          display: none;
+        }
+      }
+    }
+    & .content {
+      transform: skewX(15deg) translateY(-100%);
+      transition: transform 0.5s;
+      position: absolute;
+      top: 0;
+      left: -20vw;
+      height: 100%;
+      width: 130%;
+      display: flex;
+      background: rgba(0, 0, 0, 0.5);
+      background-size: 200%;
+      z-index: 2;
+
+      & p {
+        margin: auto;
+        color: #fff;
+        font-size: calc(1.2rem + 1vw);
+        max-width: 40vw;
+      }
+    }
+
+    .hover {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: -20vw;
+      width: 130%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    transform: skewX(15deg);
+      
+      & i {
+        margin: auto;
+        font-size: calc(2rem + 1vw);
+        color: #fff;
+      }
+    }
+
+    &:hover {
+      .hover {
+        display: flex;
+      }
+    }
+  }
+  .hero-section {
+    & .content {
+      transform: skewX(15deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+
+      & .button {
+        position: relative;
+        background: transparent;
+        border-bottom: 2px solid #fff;
+        color: #fff;
+        margin: auto;
+        margin-bottom: 8rem;
+        text-decoration: none;
+        font-family: "Gill Sans", "Trebuchet MS", sans-serif;
+        font-size: 24px;
+        padding: 0.5rem 0.75rem;
+        transition: background 0.25s, color 0.25s;
+        overflow: hidden;
+        &:before {
+          position: absolute;
+          content: "";
+          bottom: 0px;
+          border-top: 2px solid #fff;
+          width: 100%;
+          height: 100%;
+          left: 100%;
+          transition: left 0.5s;
+        }
+        &:after {
+          position: absolute;
+          content: "";
+          bottom: -100%;
+          border-left: 2px solid #fff;
+          border-right: 2px solid #fff;
+          width: 100%;
+          height: 100%;
+          left: 0;
+          transition: bottom 0.5s;
+          transition-delay: 0.5s;
+        }
+        &:hover {
+          transition-delay: 1s;
+          background: #fff;
+          color: #0ff;
+          &:before {
+            left: 0px;
+            transition-delay: 0.5s;
+          }
+          &:after {
+            bottom: -2px;
+            transition-delay: 0s;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    margin-top: 3rem !important;
+    transform: skewX(15deg) translateX(-3vw) !important;
+  }
+  .button {
+    font-size: 12px !important;
+    margin-bottom: auto !important;
+    margin-top: 8rem !important;
+  }
+}
